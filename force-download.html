@@ -1,0 +1,29 @@
+<button class="js-download-link button" onclick="downloadFile('https://wattswork.s3.amazonaws.com/test-media/video/test_Drop-1280x720-16-9-HD.mp4','dwn.mp4'); return false;">Download MP4 File</button>
+    
+<button class="js-download-link button" onclick="downloadFile('https://wattswork.s3.amazonaws.com/test-media/PDFs/test-file.pdf','tfile.pdf'); return false;">Download PDF File</button>        
+
+<button class="js-download-link button" onclick="downloadFile('https://wattswork.s3.amazonaws.com/test-media/Text/test-file.txt','file.txt'); return false;">Download TXT File</button>
+
+<script type="text/javascript">
+  function downloadFile(data, fileName, type="text/plain") {
+    // Create an invisible A element
+    const a = document.createElement("a");
+    a.style.display = "none";
+    document.body.appendChild(a);
+
+    // Set the HREF to a Blob representation of the data to be downloaded
+    a.href = window.URL.createObjectURL(
+      new Blob([data], { type })
+    );
+
+    // Use download attribute to set set desired file name
+    a.setAttribute("download", fileName);
+
+    // Trigger the download by simulating click
+    a.click();
+
+    // Cleanup
+    window.URL.revokeObjectURL(a.href);
+    document.body.removeChild(a);
+  }
+</script>
